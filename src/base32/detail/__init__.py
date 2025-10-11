@@ -1,15 +1,10 @@
-from .charset import INVALID, NixBase32Char, NixBase32Charset, charset
 from .reverse_lookup import reverse_lookup
-
-
-def encoded_length(n: int) -> int:
-    return (n * 8 - 1) // 5 + 1
-
+from .types import INVALID, NixBase32Char, NixBase32Str, charset
 
 __all__ = [
     "INVALID",
     "NixBase32Char",
-    "NixBase32Charset",
+    "NixBase32Str",
     "charset",
     "encoded_length",
     "reverse_lookup",

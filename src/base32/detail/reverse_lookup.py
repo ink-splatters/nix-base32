@@ -1,4 +1,4 @@
-from . import INVALID, NixBase32Char, charset
+from .types import INVALID, NixBase32Char, charset
 
 
 def build_lookup_table() -> list[int]:
