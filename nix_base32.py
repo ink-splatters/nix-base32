@@ -45,8 +45,7 @@ def encode(bs: bytes) -> str:
         c = ((b1 >> j) | ((b2 << (8 - j)) & 0xFF)) & 0xFF
         out.append(_chars[c & 0x1F])
 
-    # Strip redundant leading zero groups for symmetry
-    return "".join(out)  # .lstrip(_chars[0])
+    return "".join(out)
 
 
 def decode(s: str) -> bytes:
