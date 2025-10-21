@@ -1,16 +1,44 @@
+"""Base32 encoding following the Nix variant semantics.
+
+This module defines :func:`encode`, which converts arbitrary byte
+strings into a :class:`~base32.detail.types.NixBase32Str`.
+
+The algorithm mirrors the Nix implementation.
+"""
+
 from .detail import NixBase32Str, charset, encoded_length
 
 
 def encode(bs: bytes) -> NixBase32Str:
+    """Encode a byte sequence into a Nix Base32 string.
+
+    Each group of five bits in ``bs`` is mapped to a single
+    character from the Nix Base32 alphabet. The result omits
+    padding characters and is guaranteed to roundtrip through
+    :func:`base32.decode`.
+
+    :param bs: Bytes to encode.
+    :type bs: bytes
+    :returns: Base32 string representation.
+    :rtype: base32.detail.types.NixBase32Str
+
+    :example:
+        >>> from base32 import encode
+        >>> encode(b"foo")
+        NixBase32Str('mzxw6')
+        >>> encode(b"")
+        NixBase32Str('')
+    .. seealso::
+       **Nix reference implementation:**
+       https://github.com/NixOS/nix/blob/fb117e0cacc9b0bb29288ee9d3cb6dc0b5ff34a5/src/libutil/base-nix-32.cc#L20
+    """
     if not bs:
         return NixBase32Str("")
 
     length = encoded_length(len(bs))
     out: list[str] = []
 
-    # Mirrors the reference algorithm: walk 5 bit groups from MSB to LSB,
-    # pulling from adjacent bytes as needed:
-    # https://github.com/NixOS/nix/blob/fb117e0cacc9b0bb29288ee9d3cb6dc0b5ff34a5/src/libutil/base-nix-32.cc#L20
+    #  Walk 5-bit groups from MSB to LSB.
     for n in reversed(range(length)):
         b = n * 5
         i = b // 8
