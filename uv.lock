@@ -110,10 +110,12 @@ wheels = [
 name = "nix-base32"
 source = { editable = "." }
 
-[package.dev-dependencies]
+[package.optional-dependencies]
 cli = [
     { name = "click" },
 ]
+
+[package.dev-dependencies]
 dev = [
     { name = "poethepoet" },
     { name = "pytest" },
@@ -123,9 +125,10 @@ dev = [
 ]
 
 [package.metadata]
+requires-dist = [{ name = "click", marker = "extra == 'cli'", specifier = ">=8.3.0" }]
+provides-extras = ["cli"]
 
 [package.metadata.requires-dev]
-cli = [{ name = "click", specifier = ">=8.3.0" }]
 dev = [
     { name = "poethepoet", specifier = ">=0.36.0" },
     { name = "pytest", specifier = ">=8.4.1" },
