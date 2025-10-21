@@ -14,7 +14,7 @@ ______________________________________________________________________
 uv sync
 uv pip install .[cli]
 poe fix        # format and lint
-poe test       # run tests
+poe test       # run tests with coverage
 ```
 
 ______________________________________________________________________

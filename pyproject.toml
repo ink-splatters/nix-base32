@@ -27,6 +27,7 @@ classifiers = [
 dev = [
     "poethepoet>=0.36.0",
     "pytest>=8.4.1",
+    "pytest-cov>=5.0.0",
     "ruff>=0.12.4",
     "ty>=0.0.1a21",
 ]
@@ -84,4 +85,7 @@ addopts = [
     "--strict-markers",
     "--strict-config",
     "-v",
+    "--cov=base32",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-report=xml",
 ]
