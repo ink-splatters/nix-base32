@@ -7,15 +7,8 @@ ______________________________________________________________________
 ## Installation
 
 ```bash
-uv pip install nix-base32
+uv pip install 'nix-base32[cli] @ git+https://github.com/ink-splatters/nix-base32'
 ```
-
-### CLI
-
-```bash
-uv pip install nix-base32[cli]
-```
-
 ______________________________________________________________________
 
 ## Usage
@@ -31,7 +24,7 @@ print(encoded)           # -> NixBase32Str('nbswy3dp')
 print(decode(encoded))   # -> b'hello'
 ```
 
-### Shell
+### CLI
 
 ```bash
 echo "68656c6c6f..." | base32 encode -           # hex -> Nix Base32
