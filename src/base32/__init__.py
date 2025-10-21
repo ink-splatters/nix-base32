@@ -1,9 +1,9 @@
-"""Pure-Python implementation of the Nix-style Base32 codec.
+"""Pure-Python implementation of the Nix-style base32 codec.
 
 The interface is two functions—:func:`encode` and :func:`decode`.
 The codec generally follows upstream implementation (in Nix source tree)
 
-The Nix base32 variant differs from RFC 4648 Base32:
+The Nix base32 variant differs from RFC 4648 base32:
 letters *e*, *o*, *u*, and *t* are omitted.
 
 Example

@@ -1,6 +1,6 @@
-"""Reverse lookup utilities for the Nix-style Base32 alphabet.
+"""Reverse lookup utilities for the Nix-style base32 alphabet.
 
-Provides a table-based constant-time mapping from Base32 characters back
+Provides a table-based constant-time mapping from base32 characters back
 to their numeric digit values.
 Invalid characters are consistently mapped to the :data:`INVALID`
 sentinel value, enabling efficient checks during decoding.
@@ -10,10 +10,10 @@ from .types import INVALID, NixBase32Char, charset
 
 
 def build_lookup_table() -> list[int]:
-    """Construct the ASCII lookup table for the Nix Base32 alphabet.
+    """Construct the ASCII lookup table for the Nix base32 alphabet.
 
     Builds a 256-element array mapping every possible 8-bit character
-    to its corresponding Base32 digit value or :data:`INVALID` if the
+    to its corresponding base32 digit value or :data:`INVALID` if the
     character is not part of the alphabet.
 
     :returns:
@@ -33,7 +33,7 @@ def build_lookup_table() -> list[int]:
 
 
 lookup_table: list[int] = build_lookup_table()
-"""Prebuilt lookup table for ASCII → Base32 digit mapping.
+"""Prebuilt lookup table for ASCII → base32 digit mapping.
 
 This table is generated once at import time to provide constant-time
 access for all subsequent reverse lookups.
@@ -43,12 +43,12 @@ access for all subsequent reverse lookups.
 
 
 def reverse_lookup(ch: NixBase32Char) -> int | None:
-    """Convert a Nix Base32 character to its numeric digit index.
+    """Convert a Nix base32 character to its numeric digit index.
 
     Uses :data:`lookup_table` for a direct translation of the character
     to its digit value. Returns ``None`` for invalid characters.
 
-    :param ch: Single Base32 character to convert.
+    :param ch: Single base32 character to convert.
     :type ch: NixBase32Char
     :returns:
         Integer digit index (0..31) or ``None`` if invalid.

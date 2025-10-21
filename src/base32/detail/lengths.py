@@ -1,14 +1,14 @@
-"""Length computation helpers for Nix Base32 encoding.
+"""Length computation helpers for Nix base32 encoding.
 
 These functions mirror the capacity and sizing formulas used by the
 official Nix implementation. They allow callers to estimate the output
 length of encoded data or the maximum number of bytes that can be safely
-decoded from a given Base32 representation.
+decoded from a given base32 representation.
 """
 
 
 def encoded_length(n: int) -> int:
-    """Compute the number of Nix Base32 characters required to encode ``n`` bytes.
+    """Compute the number of Nix base32 characters required to encode ``n`` bytes.
 
     The calculation uses the formula::
 
@@ -20,7 +20,7 @@ def encoded_length(n: int) -> int:
 
     :param n: Number of bytes in the input data.
     :type n: int
-    :returns: Number of Base32 characters required to represent the input.
+    :returns: Number of base32 characters required to represent the input.
     :rtype: int
 
     :example:
@@ -33,13 +33,13 @@ def encoded_length(n: int) -> int:
 
 
 def max_decoded_length(n: int) -> int:
-    """Compute the maximum number of bytes that may decode from ``n`` Base32 characters.
+    """Compute the maximum number of bytes that may decode from ``n`` base32 characters.
 
     This mirrors the logic used in the Nix reference decoder:
     ``ceil(n * 5 / 8)``.
     It yields the upper bound of decoded bytes to aid buffer preallocation.
 
-    :param n: Number of Base32 characters in the encoded input.
+    :param n: Number of base32 characters in the encoded input.
     :type n: int
     :returns: Maximum number of bytes that can be decoded.
     :rtype: int

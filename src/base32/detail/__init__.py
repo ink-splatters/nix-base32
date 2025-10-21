@@ -1,6 +1,6 @@
-"""Low-level internal utilities for Nix-style Base32 encoding and decoding.
+"""Low-level internal utilities for Nix-style base32 encoding and decoding.
 
-This subpackage provides fine-grained tools used by higher-level Base32
+This subpackage provides fine-grained tools used by higher-level base32
 logic.  It encapsulates Nix-specific alphabet definitions, validation
 types, length computations, and fast reverse-lookup functionality.
 

@@ -1,8 +1,8 @@
 # fmt: off
-"""Type definitions and constants for Nix-style Base32 encoding.
+"""Type definitions and constants for Nix-style base32 encoding.
 
 Defines the Nix-specific alphabet, type aliases for valid characters and
-strings, and validation logic that ensures Base32 strings contain only
+strings, and validation logic that ensures base32 strings contain only
 permitted symbols.
 
 The alphabet used here omits ambiguous letters ("e", "o", "u", "t") to
@@ -29,7 +29,7 @@ def get_args(x: typing.TypeAliasType):
 
 
 INVALID: int = 0xFF
-"""Sentinel integer used for invalid Base32 character mappings."""
+"""Sentinel integer used for invalid base32 character mappings."""
 
 
 # Original reference:
@@ -42,24 +42,24 @@ type NixBase32Char = typing.Literal[
     "h","i","j","k","l","m","n","p",
     "q","r","s","v","w","x","y","z"
 ]
-"""Literal type enumerating every valid Nix Base32 character."""
+"""Literal type enumerating every valid Nix base32 character."""
 
 
 type NixBase32Charset = typing.Literal["".join(get_args(NixBase32Char))]
-"""Literal of the full concatenated Nix Base32 alphabet."""
+"""Literal of the full concatenated Nix base32 alphabet."""
 
 charset: NixBase32Charset = get_args(NixBase32Charset)[0]
-"""Canonical string representation of the Nix Base32 alphabet, in order."""
+"""Canonical string representation of the Nix base32 alphabet, in order."""
 
 
 class NixBase32Str(str):
-    """Validated string subclass restricted to Nix Base32 characters.
+    """Validated string subclass restricted to Nix base32 characters.
 
     Instances of this class behave like built-in :class:`str` but cannot
     contain invalid symbols. Construction will raise :class:`ValueError`
     if the input includes any character not in the official Nix alphabet.
 
-    :param value: Base32 string value to validate and store.
+    :param value: base32 string value to validate and store.
     :type value: str
     :raises ValueError: If the input contains any disallowed character.
 

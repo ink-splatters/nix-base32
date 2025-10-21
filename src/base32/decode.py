@@ -1,4 +1,4 @@
-"""Base32 decoding utility following the Nix variant.
+"""base32 decoding utility following the Nix variant.
 
 Implements :func:`decode`, the inverse of
 :func:`base32.encode`.
@@ -8,16 +8,16 @@ from .detail import NixBase32Str, max_decoded_length, reverse_lookup
 
 
 def decode(s: NixBase32Str) -> bytes:
-    """Decode a Nix Base32 string back into the original bytes.
+    """Decode a Nix base32 string back into the original bytes.
 
     The algorithm reverses :func:`base32.encode`, consuming bits
     five at a time from LSB to MSB (right to left).
 
-    :param s: Nix Base32 string to decode.
+    :param s: Nix base32 string to decode.
     :type s: base32.detail.types.NixBase32Str
     :returns: Original binary data represented by ``s``.
     :rtype: bytes
-    :raises ValueError: If the string contains invalid Base32 symbol(s).
+    :raises ValueError: If the string contains invalid base32 symbol(s).
 
     :example:
         >>> from base32 import encode, decode

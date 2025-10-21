@@ -1,6 +1,6 @@
 # nix‑base32
 
-Pure‑Python implementation of the Nix‑specific Base32 variant.
+Pure‑Python implementation of the Nix‑specific base32 variant.
 
 ______________________________________________________________________
 
@@ -9,6 +9,7 @@ ______________________________________________________________________
 ```bash
 uv tool install 'nix-base32[cli] @ git+https://github.com/ink-splatters/nix-base32'
 ```
+
 ______________________________________________________________________
 
 ## Usage
@@ -26,9 +27,19 @@ print(decode(encoded))   # -> b'hello'
 
 ### CLI
 
+the CLI was inspired by BSD bintrans' `base64` util (now part of standard macOS distribution).
+
+_Examples:_
+
 ```bash
-echo "68656c6c6f..." | base32 encode -           # hex -> Nix Base32
-echo "nbswy3dp..." | base32 decode -             # Nix Base32 -> hex
+❯ echo de2fc4ce5252da49a272fb22e68c73dcfa12ef08077ac26b40ad3a40dd31376e | base32
+0vip67fl0fmd81mw4yh713pi5ynwff6fc8pvfai4knjjab7c8byy
+
+❯ echo 0vip67fl0fmd81mw4yh713pi5ynwff6fc8pvfai4knjjab7c8byy | base32 --sri
+sha256-3i/EzlJS2kmicvsi5oxz3PoS7wgHesJrQK06QN0xN24=
+
+❯ echo de2fc4ce5252da49a272fb22e68c73dcfa12ef08077ac26b40ad3a40dd31376e | base32 | base32 -d
+de2fc4ce5252da49a272fb22e68c73dcfa12ef08077ac26b40ad3a40dd31376e
 ```
 
 ______________________________________________________________________
