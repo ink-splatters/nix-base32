@@ -117,6 +117,7 @@ cli = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "click" },
     { name = "poethepoet" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -130,6 +131,7 @@ provides-extras = ["cli"]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "click", specifier = ">=8.3.0" },
     { name = "poethepoet", specifier = ">=0.36.0" },
     { name = "pytest", specifier = ">=8.4.1" },
     { name = "pytest-cov", specifier = ">=5.0.0" },

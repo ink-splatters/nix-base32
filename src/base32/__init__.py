@@ -25,8 +25,18 @@ try:
 except ImportError:
     __version__ = "dev"
 
-from .decode import decode
+from .decode import decode, decode_iter, decode_stream, decode_to_stream
 from .detail import NixBase32Str
-from .encode import encode
+from .encode import encode, encode_iter, encode_stream, encode_to_stream
 
-__all__ = ["NixBase32Str", "decode", "encode"]
+__all__ = [
+    "NixBase32Str",
+    "decode",
+    "decode_iter",
+    "decode_stream",
+    "decode_to_stream",
+    "encode",
+    "encode_iter",
+    "encode_stream",
+    "encode_to_stream",
+]

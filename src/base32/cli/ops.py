@@ -9,6 +9,13 @@ import base32
 
 from .io import infile, outfile
 
+# Expected hash lengths for SRI validation
+SRI_HASH_LENGTHS: dict[str, int] = {
+    "sha256": 32,
+    "sha384": 48,
+    "sha512": 64,
+}
+
 
 def encode(input: str, output: str) -> None:
     """Reads input and writes Nix base32 output
@@ -24,12 +31,22 @@ def encode(input: str, output: str) -> None:
     with infile(input) as f:
         data = f.read().strip()
 
-    # if data is SRI hash
+    # if data is SRI hash (e.g., sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=)
     if m := re.match(
-        r"^sha\d{3}-((?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?)$",
+        r"^(sha256|sha384|sha512)-((?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?)$",
         data,
     ):
-        payload = base64.b64decode(m.group(1))
+        hash_type = m.group(1)
+        payload = base64.b64decode(m.group(2))
+
+        # Validate hash length matches algorithm
+        expected_len = SRI_HASH_LENGTHS[hash_type]
+        if len(payload) != expected_len:
+            click.echo(
+                f"error: {hash_type} hash must be {expected_len} bytes, got {len(payload)}",
+                err=True,
+            )
+            sys.exit(1)
     else:
         if not re.fullmatch(r"[0-9a-fA-F]+", data):
             click.echo("error: only hex or SRI input supported", err=True)
