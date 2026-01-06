@@ -67,7 +67,7 @@ __version__ = "{version}"
 [tool.poe.tasks]
 typecheck = "ty check"
 lint = ["ruff:check", "typecheck"]
-fix = ["ruff:format", "ruff:fix"]
+fix = ["ruff:format", "ruff:fix", "typecheck"]
 test = "pytest -q"
 
 [tool.poe.tasks."ruff:format"]
