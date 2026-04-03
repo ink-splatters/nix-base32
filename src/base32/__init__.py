@@ -20,10 +20,15 @@ The :class:`~base32.detail.types.NixBase32Str` type is returned to
 ensure all encoded representations are valid according to Nix alphabet.
 """
 
+from importlib.metadata import PackageNotFoundError, version
+
 try:
-    from ._version import __version__ as __version__
-except ImportError:
-    __version__ = "dev"
+    __version__ = version("nix-base32")
+except PackageNotFoundError:
+    from typing import Final
+
+    __version__: Final[str] = "dev"
+
 
 from .decode import decode, decode_iter, decode_stream, decode_to_stream
 from .detail import NixBase32Str
