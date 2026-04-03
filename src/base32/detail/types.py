@@ -12,21 +12,7 @@ reduce transcription errors, following the Nix convention.
 from __future__ import annotations
 
 import typing
-
-
-def get_args(x: typing.TypeAliasType):
-    """Return the underlying arguments of a :class:`typing.TypeAliasType`.
-
-    This helper unpacks the literal arguments from a type alias that
-    wraps an internal :data:`typing.Literal`.
-
-    :param x: A :class:`typing.TypeAliasType` object.
-    :type x: typing.TypeAliasType
-    :returns: Extracted literal arguments sequence.
-    :rtype: tuple
-    """
-    return typing.get_args(x.__value__)
-
+from typing import ClassVar, Final, Literal
 
 INVALID: int = 0xFF
 """Sentinel integer used for invalid base32 character mappings."""
@@ -36,7 +22,7 @@ INVALID: int = 0xFF
 # https://github.com/NixOS/nix/blob/fb117e0cacc9b0bb29288ee9d3cb6dc0b5ff34a5/src/libutil/include/nix/util/base-nix-32.hh#L17
 # Note: 'e', 'o', 'u', 't' - omitted to avoid ambiguity.
 
-type NixBase32Char = typing.Literal[
+type NixBase32Char = Literal[
     "0","1","2","3","4","5","6","7",
     "8","9","a","b","c","d","f","g",
     "h","i","j","k","l","m","n","p",
@@ -45,10 +31,19 @@ type NixBase32Char = typing.Literal[
 """Literal type enumerating every valid Nix base32 character."""
 
 
-type NixBase32Charset = typing.Literal["".join(get_args(NixBase32Char))]
+type NixBase32Charset = Literal["0123456789abcdfghijklmnpqrsvwxyz"]
 """Literal of the full concatenated Nix base32 alphabet."""
 
-charset: NixBase32Charset = get_args(NixBase32Charset)[0]
+_charset_from_chars = "".join(typing.get_args(NixBase32Char.__value__))
+_charset_literal = typing.get_args(NixBase32Charset.__value__)[0]
+
+if _charset_from_chars != _charset_literal:
+    raise RuntimeError("Nix base32 charset type aliases are out of sync")
+
+charset: Final[NixBase32Charset] = typing.cast(
+    "NixBase32Charset",
+    _charset_from_chars,
+)
 """Canonical string representation of the Nix base32 alphabet, in order."""
 
 
@@ -72,7 +67,7 @@ class NixBase32Str(str):
         ValueError: Invalid Nix base32 string: abcd$
     """
 
-    _allowed: typing.ClassVar[set[str]] = set(charset)
+    _allowed: ClassVar[set[str]] = set(charset)
 
     def __new__(cls, value: str) -> NixBase32Str:  # noqa: PYI034
         if not set(value) <= cls._allowed:

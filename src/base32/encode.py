@@ -8,11 +8,11 @@ The algorithm mirrors the Nix implementation.
 
 from __future__ import annotations
 
-import typing
+from typing import TYPE_CHECKING, BinaryIO, TextIO
 
 from .detail import NixBase32Str, charset, encoded_length
 
-if typing.TYPE_CHECKING:
+if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
@@ -81,7 +81,7 @@ def encode_iter(bs: bytes, chunk_size: int = 8192) -> Iterator[str]:
 
 def encode_to_stream(
     bs: bytes,
-    writer: typing.TextIO,
+    writer: TextIO,
     *,
     chunk_size: int = 8192,
 ) -> int:
@@ -108,8 +108,8 @@ def encode_to_stream(
 
 
 def encode_stream(
-    reader: typing.BinaryIO,
-    writer: typing.TextIO,
+    reader: BinaryIO,
+    writer: TextIO,
     *,
     chunk_size: int = 8192,
 ) -> int:

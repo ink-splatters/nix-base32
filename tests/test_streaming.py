@@ -6,6 +6,7 @@ import random
 import pytest
 
 from base32 import (
+    NixBase32Str,
     decode,
     decode_iter,
     decode_stream,
@@ -150,7 +151,7 @@ class TestEncodeStream:
         out = io.StringIO()
         written = encode_stream(inp, out)
         assert written == len(encode(data))
-        assert decode(out.getvalue()) == data
+        assert decode(NixBase32Str(out.getvalue())) == data
 
 
 class TestDecodeStream:

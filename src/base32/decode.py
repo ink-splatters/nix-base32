@@ -6,11 +6,11 @@ Implements :func:`decode`, the inverse of
 
 from __future__ import annotations
 
-import typing
+from typing import TYPE_CHECKING, BinaryIO, TextIO
 
 from .detail import NixBase32Str, max_decoded_length, reverse_lookup
 
-if typing.TYPE_CHECKING:
+if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
@@ -87,7 +87,7 @@ def decode_iter(s: str | NixBase32Str, chunk_size: int = 8192) -> Iterator[bytes
 
 def decode_to_stream(
     s: str | NixBase32Str,
-    writer: typing.BinaryIO,
+    writer: BinaryIO,
     *,
     chunk_size: int = 8192,
 ) -> int:
@@ -115,8 +115,8 @@ def decode_to_stream(
 
 
 def decode_stream(
-    reader: typing.TextIO,
-    writer: typing.BinaryIO,
+    reader: TextIO,
+    writer: BinaryIO,
     *,
     chunk_size: int = 8192,
     strip: bool = True,
