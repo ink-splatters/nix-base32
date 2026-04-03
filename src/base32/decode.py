@@ -14,14 +14,14 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
-def decode(s: NixBase32Str) -> bytes:
+def decode(s: str | NixBase32Str) -> bytes:
     """Decode a Nix base32 string back into the original bytes.
 
     The algorithm reverses :func:`base32.encode`, consuming bits
     five at a time from LSB to MSB (right to left).
 
     :param s: Nix base32 string to decode.
-    :type s: base32.detail.types.NixBase32Str
+    :type s: str | base32.detail.types.NixBase32Str
     :returns: Original binary data represented by ``s``.
     :rtype: bytes
     :raises ValueError: If the string contains invalid base32 symbol(s).
@@ -80,7 +80,7 @@ def decode_iter(s: str | NixBase32Str, chunk_size: int = 8192) -> Iterator[bytes
         >>> for chunk in decode_iter("0" * 1000, chunk_size=100):
         ...     print(len(chunk))  # Each chunk <= 100 bytes
     """
-    decoded = decode(s)  # type: ignore[arg-type]
+    decoded = decode(s)
     for i in range(0, len(decoded), chunk_size):
         yield decoded[i : i + chunk_size]
 

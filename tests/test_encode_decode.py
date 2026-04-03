@@ -79,4 +79,4 @@ def test_decode_rejects_invalid_chars_anywhere(prioritized_invalid):
     ]
     for s in cases:
         with pytest.raises(ValueError, match=rf"invalid character {bad!r}"):
-            decode(s)  # type: ignore[arg-type]
+            decode(s)

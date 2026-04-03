@@ -6,7 +6,7 @@ Invalid characters are consistently mapped to the :data:`INVALID`
 sentinel value, enabling efficient checks during decoding.
 """
 
-from .types import INVALID, NixBase32Char, charset
+from .types import INVALID, charset
 
 
 def build_lookup_table() -> list[int]:
@@ -42,14 +42,14 @@ access for all subsequent reverse lookups.
 """
 
 
-def reverse_lookup(ch: NixBase32Char) -> int | None:
+def reverse_lookup(ch: str) -> int | None:
     """Convert a Nix base32 character to its numeric digit index.
 
     Uses :data:`lookup_table` for a direct translation of the character
     to its digit value. Returns ``None`` for invalid characters.
 
     :param ch: Single base32 character to convert.
-    :type ch: NixBase32Char
+    :type ch: str
     :returns:
         Integer digit index (0..31) or ``None`` if invalid.
     :rtype: int | None
@@ -60,5 +60,12 @@ def reverse_lookup(ch: NixBase32Char) -> int | None:
         >>> reverse_lookup("?")
         None
     """
-    digit: int = lookup_table[ord(ch)]
+    if len(ch) != 1:
+        return None
+
+    codepoint = ord(ch)
+    if codepoint >= len(lookup_table):
+        return None
+
+    digit: int = lookup_table[codepoint]
     return None if digit == INVALID else digit
