@@ -32,6 +32,7 @@ dev = [
     "pytest-cov>=5.0.0",
     "ruff>=0.12.4",
     "ty>=0.0.1a21",
+    "zizmor>=1.27.0",
 ]
 
 [project.optional-dependencies]
@@ -50,6 +51,7 @@ typecheck = "ty check"
 lint = ["ruff:check", "typecheck"]
 fix = ["ruff:format", "ruff:fix", "typecheck"]
 test = "pytest -q"
+zizmor = "zizmor ."
 
 [tool.poe.tasks."ruff:format"]
 cmd = "ruff format"
