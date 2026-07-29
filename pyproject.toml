@@ -48,10 +48,11 @@ packages = ["src/base32"]
 
 [tool.poe.tasks]
 typecheck = "ty check"
-lint = ["ruff:check", "typecheck"]
-fix = ["ruff:format", "ruff:fix", "typecheck"]
+lint = ["ruff:check", "typecheck", "zizmor"]
+check=["lint"]
+fix = ["ruff:format", "ruff:fix", "typecheck", "zizmor"]
 test = "pytest -q"
-zizmor = "zizmor ."
+zizmor = "zizmor -p ."
 
 [tool.poe.tasks."ruff:format"]
 cmd = "ruff format"
