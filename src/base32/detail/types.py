@@ -11,39 +11,19 @@ reduce transcription errors, following the Nix convention.
 
 from __future__ import annotations
 
-import typing
-from typing import ClassVar, Final, Literal
+from typing import ClassVar, Literal, get_args
 
 INVALID: int = 0xFF
 """Sentinel integer used for invalid base32 character mappings."""
-
 
 # Original reference:
 # https://github.com/NixOS/nix/blob/fb117e0cacc9b0bb29288ee9d3cb6dc0b5ff34a5/src/libutil/include/nix/util/base-nix-32.hh#L17
 # Note: 'e', 'o', 'u', 't' - omitted to avoid ambiguity.
 
-type NixBase32Char = Literal[
-    "0","1","2","3","4","5","6","7",
-    "8","9","a","b","c","d","f","g",
-    "h","i","j","k","l","m","n","p",
-    "q","r","s","v","w","x","y","z"
-]
-"""Literal type enumerating every valid Nix base32 character."""
-
-
 type NixBase32Charset = Literal["0123456789abcdfghijklmnpqrsvwxyz"]
 """Literal of the full concatenated Nix base32 alphabet."""
 
-_charset_from_chars = "".join(typing.get_args(NixBase32Char.__value__))
-_charset_literal = typing.get_args(NixBase32Charset.__value__)[0]
-
-if _charset_from_chars != _charset_literal:
-    raise RuntimeError("Nix base32 charset type aliases are out of sync")
-
-charset: Final[NixBase32Charset] = typing.cast(
-    "NixBase32Charset",
-    _charset_from_chars,
-)
+charset: NixBase32Charset = get_args(NixBase32Charset.__value__)[0]
 """Canonical string representation of the Nix base32 alphabet, in order."""
 
 
