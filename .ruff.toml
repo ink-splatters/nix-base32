@@ -1,5 +1,5 @@
 # Python version target for modernizations
-target-version = "py312" # Use py312 for maximum Python 3.12 modernization features
+target-version = "py314"
 line-length = 100        # From upgrade/pyproject.toml
 #indent-width = 2
 respect-gitignore = true
@@ -62,6 +62,8 @@ ignore = [
   "B008",   # do not perform function calls in argument defaults
   "N818",   # exception name should be named with an Error suffix
   "COM812", # trailing comma missing (handled by formatter)
+  "S101",   # security issues
+  "PT011",  # pytest-style
 
   # Avoid conflicts with modernization goals
   "T201", # print found (keep prints for now)
