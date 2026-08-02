@@ -6,7 +6,6 @@ strings into a :class:`~base32.detail.types.NixBase32Str`.
 The algorithm mirrors the Nix implementation.
 """
 
-from __future__ import annotations
 
 from typing import TYPE_CHECKING, BinaryIO, TextIO
 

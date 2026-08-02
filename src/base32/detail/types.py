@@ -9,7 +9,6 @@ The alphabet used here omits ambiguous letters ("e", "o", "u", "t") to
 reduce transcription errors, following the Nix convention.
 """
 
-from __future__ import annotations
 
 from typing import ClassVar, Literal, get_args
 

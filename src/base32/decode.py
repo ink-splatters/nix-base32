@@ -4,7 +4,6 @@ Implements :func:`decode`, the inverse of
 :func:`base32.encode`.
 """
 
-from __future__ import annotations
 
 from typing import TYPE_CHECKING, BinaryIO, TextIO
 

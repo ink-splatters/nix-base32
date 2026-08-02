@@ -1,6 +1,5 @@
 """CLI interface."""
 
-from __future__ import annotations
 
 import click
 
