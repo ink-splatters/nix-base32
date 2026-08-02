@@ -1,7 +1,9 @@
 import sys
-from collections.abc import Iterator
 from contextlib import contextmanager
-from typing import TextIO, cast
+from typing import TYPE_CHECKING, TextIO, cast
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 @contextmanager

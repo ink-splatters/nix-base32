@@ -4,7 +4,6 @@ Implements :func:`decode`, the inverse of
 :func:`base32.encode`.
 """
 
-
 from typing import TYPE_CHECKING, BinaryIO, TextIO
 
 from .detail import NixBase32Str, max_decoded_length, reverse_lookup

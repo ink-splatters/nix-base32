@@ -1,6 +1,5 @@
 """CLI interface."""
 
-
 import click
 
 from .. import __version__
