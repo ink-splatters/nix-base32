@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "nix-base32"
-version = "0.4.2"
+version = "0.4.3"
 description = "Pure Python implementation of nix variant of base32"
 readme = "README.md"
 requires-python = ">=3.14"
