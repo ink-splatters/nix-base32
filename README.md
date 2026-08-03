@@ -7,7 +7,7 @@ ______________________________________________________________________
 ## Installation
 
 ```bash
-uv tool install 'nix-base32[cli] @ git+https://github.com/ink-splatters/nix-base32'
+uv tool install nix-base32[cli]
 ```
 
 ______________________________________________________________________
