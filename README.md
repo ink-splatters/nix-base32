@@ -21,8 +21,8 @@ from base32 import encode, decode
 
 data = b"hello"
 encoded = encode(data)
-print(encoded)           # -> NixBase32Str('nbswy3dp')
-print(decode(encoded))   # -> b'hello'
+print(encoded)  # -> NixBase32Str('nbswy3dp')
+print(decode(encoded))  # -> b'hello'
 ```
 
 ### CLI

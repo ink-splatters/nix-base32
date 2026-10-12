@@ -3,11 +3,11 @@ from contextlib import contextmanager
 from typing import TYPE_CHECKING, TextIO, cast
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import Generator
 
 
 @contextmanager
-def infile(name: str) -> Iterator[TextIO]:
+def infile(name: str) -> Generator[TextIO]:
     """Yield a readable text stream for a filename or stdin if '-'."""
     if name == "-":
         yield cast("TextIO", sys.stdin)
@@ -17,7 +17,7 @@ def infile(name: str) -> Iterator[TextIO]:
 
 
 @contextmanager
-def outfile(name: str) -> Iterator[TextIO]:
+def outfile(name: str) -> Generator[TextIO]:
     """Yield a writable text stream for a filename or stdout if '-'."""
     if name == "-":
         yield cast("TextIO", sys.stdout)
