@@ -30,6 +30,7 @@ dev = [
     "pytest-cov>=5.0.0",
     "ruff>=0.12.4",
     "ty>=0.0.1a21",
+    "vulture>=2.16",
     "zizmor>=1.27.0",
 ]
 
@@ -45,12 +46,16 @@ base32 = "base32.cli:base32"
 packages = ["src/base32"]
 
 [tool.poe.tasks]
-typecheck = "ty check"
+vulture = "vulture src tests"
+typecheck = "ty check src tests"
 lint = ["ruff:check", "typecheck", "zizmor"]
 check=["lint"]
-fix = ["ruff:format", "ruff:fix", "typecheck", "zizmor"]
-test = "pytest -q"
+fix = ["ruff:format", "ruff:fix", "typecheck", "zizmor:fix"]
+test = "pytest -v --cov=pip_search --cov-report=term-missing"
 zizmor = "zizmor -p ."
+
+[tool.poe.tasks."zizmor:fix"]
+cmd = "zizmor -p --fix=all ."
 
 [tool.poe.tasks."ruff:format"]
 cmd = "ruff format"
